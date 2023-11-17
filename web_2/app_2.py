@@ -1,14 +1,27 @@
 import streamlit as st
-height = float(st.number_input("Boyunuzu daxil edin (metr ile): "))
-mass = int(st.number_input("Kutlenizi daxil edin (kq ile): "))
+
+height = float(st.number_input("Boyunuzu daxil edin (metr ilə: "))
+mass = int(st.number_input("Kutlenizi daxil edin (kq ilə): "))
 age = int(st.number_input("Yashinizi daxil edin: "))
-sex = st.text_input("Cinsinizi daxil edin (kişi üçün m, qadın üçün f):")
+sex = st.radio("Cinsinizi daxil edin:", ["Kişi", "Qadın"])
+result=None
 
 def vki():
-  result = mass/(height*height)
+  try:
+    if height == 0:
+      return None
+    result = mass / (height * height)
+  except ZeroDivisionError:
+    result = None
   return result
 
+
 def funk():
+  if vki() is None:
+    st.text("Height cannot be zero.")
+  else:
+    st.text('Sizin VKI-niz: {}'.format(vki()))
+
   if vki() < 18.5:
     st.text('''
   Zəif
@@ -50,14 +63,13 @@ def funk():
   Cərrahi müdaxilə kimi variantlar nəzərdən keçirilə bilər.''')
 
 
+if st.button("Heabla"):
+  if sex == 'Qadın':
+    if 18<=age<=29:
+      funk()
+      st.text('''
+      Sizin yaşınıza görə ideal ağırlıq 73 kq-dır.''')
 
-st.text(f'Sizin VKI-niz: {vki()}')
-
-if sex == 'f':
-  if 18<=age<=29:
-    funk()
-    st.text('''
-    Sizin yaşınıza görə ideal ağırlıq 73 kq-dır.''')
 
   elif 30<=age<=39:
     funk()
@@ -86,36 +98,36 @@ if sex == 'f':
 
 
 
-if sex == 'm':
-  if 18<=age<=29:
-    funk()
-    st.text('''
-    Sizin yaşınıza görə ideal ağırlıq 83 kq-dır.''')
+  if sex == 'Kişi':
+    if 18<=age<=29:
+      funk()
+      st.text('''
+      Sizin yaşınıza görə ideal ağırlıq 83 kq-dır.''')
 
-  elif 30<=age<=39:
-    funk()
-    st.text('''
-    Sizin yaşınıza görə ideal ağırlıq 90 kq-dır.''')
+    elif 30<=age<=39:
+      funk()
+      st.text('''
+      Sizin yaşınıza görə ideal ağırlıq 90 kq-dır.''')
 
-  elif 40<=age<=49:
-    funk()
-    st.text('''
-    Sizin yaşınıza görə ideal ağırlıq 91 kq-dır.''')
+    elif 40<=age<=49:
+      funk()
+      st.text('''
+      Sizin yaşınıza görə ideal ağırlıq 91 kq-dır.''')
 
-  elif 50<=age<=59:
-    funk()
-    st.text('''
-    Sizin yaşınıza görə ideal ağırlıq 91 kq-dır.''')
+    elif 50<=age<=59:
+      funk()
+      st.text('''
+      Sizin yaşınıza görə ideal ağırlıq 91 kq-dır.''')
 
-  elif 60<=age<=69:
-    funk()
-    st.text('''
-    Sizin yaşınıza görə ideal ağırlıq 90 kq-dır.''')
+    elif 60<=age<=69:
+      funk()
+      st.text('''
+      Sizin yaşınıza görə ideal ağırlıq 90 kq-dır.''')
 
-  elif 70<=age<=79:
-    funk()
-    st.text('''
-    Sizin yaşınıza görə ideal ağırlıq 86 kq-dır.''')
+    elif 70<=age<=79:
+      funk()
+      st.text('''
+      Sizin yaşınıza görə ideal ağırlıq 86 kq-dır.''')
 
 #datalari input ele. vki hesabla. her vki araligina gore neticeni ve mesleheti, yasa ve cinsiyyete gore ideal cekini print ele.
 #yas araliqlarina gore vki verilir. bu vki lere gore dusturdan mass tap. minimum maksimum
