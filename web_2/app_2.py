@@ -1,8 +1,8 @@
 import streamlit as st
 
 height = float(st.number_input("Boyunuzu daxil edin (metr ilə): "))
-mass = int(st.number_input("Kutlenizi daxil edin (kq ilə): "))
-age = int(st.number_input("Yashinizi daxil edin: "))
+mass = int(st.number_input("Kütlənizi daxil edin (kq ilə): "))
+age = int(st.number_input("Yaşınızı daxil edin: "))
 sex = st.radio("Cinsinizi daxil edin:", ["Kişi", "Qadın"])
 result=None
 
